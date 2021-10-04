@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="18dp">
+    app:cardCornerRadius="18dp"
+    android:id="@+id/itemUser"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

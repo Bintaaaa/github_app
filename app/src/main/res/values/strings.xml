@@ -4,4 +4,6 @@
     <string name="username">Username</string>
     <string name="url">https://api.github.com/users/Bintaaaa</string>
     <string name="hiasan_detail">hiasan detail</string>
+    <string name="search">Search</string>
+    <string name="button_search">Button Search</string>
 </resources>
