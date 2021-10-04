@@ -8,8 +8,8 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.It
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class UserAdapter(private val listUser: ArrayList<User>) :
-    RecyclerView.Adapter<UserAdapter.UserHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
+    private val listUser = ArrayList<User>()
 
     inner class UserHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(user: User){
