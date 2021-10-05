@@ -9,12 +9,6 @@ data class User(
     @field:SerializedName("id")
     val id: Int,
 
-    @field:SerializedName("following_url")
-    val followingUrl: String,
-
-    @field:SerializedName("followers_url")
-    val followersUrl: String,
-
     @field:SerializedName("url")
     val url: String,
 

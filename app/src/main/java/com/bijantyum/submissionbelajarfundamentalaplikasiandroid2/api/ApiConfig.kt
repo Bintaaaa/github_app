@@ -5,12 +5,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        fun getApiService(): ApiService{
+        private const val BASE_URL = "https://api.github.com/"
+        fun getApiService(): ApiService {
+
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            return retrofit.create(ApiService::class.java)
+            val apiInstance = retrofit.create(ApiService::class.java)
+            return apiInstance
         }
     }
 }

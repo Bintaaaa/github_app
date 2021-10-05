@@ -12,9 +12,9 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main.MainVi
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: UserAdapter
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var viewModel : MainViewModel
+    private lateinit var adapter : UserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun searchUser(){
         binding.apply {
-            val query = edtQuery.toString()
+            val query = edtQuery.text.toString()
             if (query.isEmpty()) return
             showLoading(true)
             viewModel.setSearchUsers(query)

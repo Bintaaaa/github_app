@@ -10,8 +10,12 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
     private val listUser = ArrayList<User>()
-
-    inner class UserHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
+    fun setList(users: ArrayList<User>){
+        listUser.clear()
+        listUser.addAll(users)
+        notifyDataSetChanged()
+    }
+    inner class UserHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(user: User){
             binding.apply{
                 Glide.with(itemUser)
@@ -21,7 +25,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
                     .into(ivUserItem)
 
                 tvUsernameItem.text = user.login
-                tvUrlItem.text = user.url
+                tvUrlItem.text = "${user.url}"
             }
         }
     }
@@ -37,10 +41,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
 
     override fun getItemCount(): Int = listUser.size
 
-    fun setList(users: ArrayList<User>){
-        listUser.clear()
-        listUser.addAll(users)
-        notifyDataSetChanged()
-    }
+
 
 }
