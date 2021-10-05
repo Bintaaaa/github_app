@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.R
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.FragmentDetailFollowBinding
 
-class FollowersFragment: Fragment(R.layout.fragment_detail_follow) {
+class FollowingFragment: Fragment(R.layout.fragment_detail_follow) {
     private var _binding : FragmentDetailFollowBinding? = null
     private val binding get() = _binding!!
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

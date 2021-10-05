@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
             override fun OnItemClick(data: User) {
-                Intent(this@MainActivity,DetailUserActivity::class.java).also {
+                val detailIntent = Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME,data.login)
+                    startActivity(it)
                 }
             }
 
