@@ -13,7 +13,12 @@ import retrofit2.Response
 
 class MainViewModel : ViewModel() {
 
-    val listUsers = MutableLiveData<ArrayList<User>>()
+    private val _listUsers = MutableLiveData<ArrayList<User>>()
+    fun getSearchUsers(): LiveData<ArrayList<User>> = _listUsers
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
 
     fun setSearchUsers(query: String){
        ApiConfig.getApiService()
@@ -21,18 +26,19 @@ class MainViewModel : ViewModel() {
            .enqueue(object : Callback<UserResponse>{
                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                    if(response.isSuccessful){
-                       listUsers.postValue(response.body()?.items)
+                       _isLoading.value = false
+                       _listUsers.postValue(response.body()?.items)
                    }
                }
 
                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                   _isLoading.value = true
                    Log.d(TAG, "${t.message}")
                }
 
            })
     }
 
-    fun getSearchUsers(): LiveData<ArrayList<User>> = listUsers
 
     companion object{
         private const val TAG = "MainViewModel"

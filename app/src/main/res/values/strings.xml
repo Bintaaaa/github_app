@@ -6,4 +6,11 @@
     <string name="hiasan_detail">hiasan detail</string>
     <string name="search">Search</string>
     <string name="button_search">Button Search</string>
+    <string name="usesrname">Username</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="google_inc">Google Inc.</string>
+    <string name="jakarta_indonesia">Jakarta, Indonesia</string>
+    <string name="total">17890</string>
+    <string name="repository">Repository</string>
+    <string name="followers">Followers</string>
 </resources>
