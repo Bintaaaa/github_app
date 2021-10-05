@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubmissionBelajarFundamentalAplikasiAndroid2">
         <activity
-            android:name=".ui.pages.DetailUserActivity"
+            android:name=".ui.detail.DetailUserActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

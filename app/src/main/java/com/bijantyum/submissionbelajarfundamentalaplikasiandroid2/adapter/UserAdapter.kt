@@ -10,6 +10,12 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
     private val listUser = ArrayList<User>()
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     fun setList(users: ArrayList<User>){
         listUser.clear()
         listUser.addAll(users)
@@ -17,6 +23,11 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
     }
     inner class UserHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(user: User){
+
+            binding.root.setOnClickListener {
+                onItemClickCallback?.OnItemClick(user)
+            }
+
             binding.apply{
                 Glide.with(itemUser)
                     .load(user.avatarUrl)
@@ -41,6 +52,8 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
 
     override fun getItemCount(): Int = listUser.size
 
-
+    interface OnItemClickCallback{
+        fun OnItemClick(data: User)
+    }
 
 }

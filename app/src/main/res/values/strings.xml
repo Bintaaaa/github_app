@@ -13,4 +13,5 @@
     <string name="total">17890</string>
     <string name="repository">Repository</string>
     <string name="followers">Followers</string>
+    <string name="following">Following</string>
 </resources>

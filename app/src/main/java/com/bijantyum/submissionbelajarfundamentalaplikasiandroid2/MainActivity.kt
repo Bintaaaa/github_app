@@ -1,5 +1,6 @@
 package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -7,7 +8,9 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.UserAdapter
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.User
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivityMainBinding
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail.DetailUserActivity
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +25,15 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
+
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun OnItemClick(data: User) {
+                Intent(this@MainActivity,DetailUserActivity::class.java).also {
+                    it.putExtra(DetailUserActivity.EXTRA_USERNAME,data.login)
+                }
+            }
+
+        })
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
         viewModel.isLoading.observe(this, {
