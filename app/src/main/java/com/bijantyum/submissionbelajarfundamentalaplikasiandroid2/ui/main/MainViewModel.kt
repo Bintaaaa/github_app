@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
 
 
     fun setSearchUsers(query: String){
+        _isLoading.value = true
        ApiConfig.getApiService()
            .getSearchUsers(query)
            .enqueue(object : Callback<UserResponse>{
@@ -32,7 +33,7 @@ class MainViewModel : ViewModel() {
                }
 
                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                   _isLoading.value = true
+                   _isLoading.value = false
                    Log.d(TAG, "${t.message}")
                }
 

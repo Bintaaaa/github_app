@@ -2,10 +2,15 @@ package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.R
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.SectionPagerAdapter
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivityDetailUserBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
 
@@ -17,7 +22,10 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val usernameDetail = intent.getStringExtra(EXTRA_USERNAME)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_USERNAME,usernameDetail)
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
         viewModel.setUserDetail(username = usernameDetail)
@@ -27,10 +35,10 @@ class DetailUserActivity : AppCompatActivity() {
                     tvDetailUsername.text = it.login
                     tvDetailName.text = it.name
                     tvDetailCompany.text = it.company
-                    tvDetailRepo.text = "${it.publicRepos}"
+                    tvDetailRepo.text = "${it.following}"
                     tvDetailLocation.text = it.location
                     tvDetailFollowers.text = "${it.followers}"
-                    tvDetailFollowing.text = "${it.following}"
+                    tvDetailFollowing.text = "${it.publicRepos}"
                     Glide.with(this@DetailUserActivity)
                         .load(it.avatarUrl)
                         .centerCrop()
@@ -39,16 +47,23 @@ class DetailUserActivity : AppCompatActivity() {
             }
         })
 
-//        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
-//        binding.apply {
-//            viewPager.adapter = sectionPagerAdapter
-//            tabs.setupWithViewPager(viewPager)
-//        }
+        val sectionPagerAdapter = SectionPagerAdapter(this,bundle)
+        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        viewPager.adapter = sectionPagerAdapter
+        val tabs: TabLayout = findViewById(R.id.tabs)
+        TabLayoutMediator(tabs, viewPager){ tab,position ->
+        tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
 
 
     companion object{
         const val EXTRA_USERNAME = "extra_username"
+            @StringRes
+            private val TAB_TITLES = intArrayOf(
+                R.string.followers,
+                R.string.following
+            )
     }
 }

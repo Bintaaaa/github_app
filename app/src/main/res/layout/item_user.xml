@@ -12,7 +12,9 @@
     android:foreground="?android:selectableItemBackground"
     app:cardCornerRadius="18dp"
 
-    card_view:layout_goneMarginTop="16dp">
+    card_view:layout_goneMarginTop="16dp"
+    android:layout_marginBottom="2dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

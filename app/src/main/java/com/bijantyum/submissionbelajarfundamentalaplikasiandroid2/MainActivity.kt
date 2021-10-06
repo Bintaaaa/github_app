@@ -37,15 +37,42 @@ class MainActivity : AppCompatActivity() {
         })
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
-        viewModel.isLoading.observe(this, {
-            showLoading(it)
-        })
-
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
             rvUser.setHasFixedSize(true)
             rvUser.adapter = adapter
+        }
 
+        searchListener()
+
+        viewModel.getSearchUsers().observe(this,{
+            if (it!=null){
+                adapter.setList(it)
+                viewModel.isLoading.observe(this, {
+                    showLoading(it)
+                })
+            }
+        })
+
+    }
+
+    private fun searchUser(){
+        binding.apply {
+            val query = edtQuery.text.toString()
+            if (query.isEmpty()) return
+            viewModel.isLoading.observe(this@MainActivity, {
+                showLoading(it)
+            })
+            viewModel.setSearchUsers(query)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun searchListener(){
+        binding.apply {
             btnSearch.setOnClickListener {
                 searchUser()
             }
@@ -58,28 +85,9 @@ class MainActivity : AppCompatActivity() {
 
                     return@setOnKeyListener false
             }
-
-        }
-
-        viewModel.getSearchUsers().observe(this,{
-            if (it!=null){
-                adapter.setList(it)
-                showLoading(false)
-            }
-        })
-    }
-
-    private fun searchUser(){
-        binding.apply {
-            val query = edtQuery.text.toString()
-            if (query.isEmpty()) return
-            showLoading(true)
-            viewModel.setSearchUsers(query)
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+
 }
 
