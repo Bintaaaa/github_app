@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.User
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ItemUserBinding
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.OnItemClickCallback
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.loadImage
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
@@ -21,22 +23,17 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
         listUser.addAll(users)
         notifyDataSetChanged()
     }
-    inner class UserHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class UserHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(user: User){
 
             binding.root.setOnClickListener {
-                onItemClickCallback?.OnItemClick(user)
+                onItemClickCallback?.onItemClick(user)
             }
 
             binding.apply{
-                Glide.with(itemUser)
-                    .load(user.avatarUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .centerCrop()
-                    .into(ivUserItem)
-
+                ivUserItem.loadImage(user.avatarUrl)
                 tvUsernameItem.text = user.login
-                tvUrlItem.text = "${user.url}"
+                tvUrlItem.text = user.url
             }
         }
     }
@@ -51,9 +48,5 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
     }
 
     override fun getItemCount(): Int = listUser.size
-
-    interface OnItemClickCallback{
-        fun OnItemClick(data: User)
-    }
 
 }

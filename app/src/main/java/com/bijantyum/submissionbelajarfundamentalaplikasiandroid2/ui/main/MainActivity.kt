@@ -1,4 +1,4 @@
-package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2
+package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.UserAd
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.User
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivityMainBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail.DetailUserActivity
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main.MainViewModel
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.OnItemClickCallback
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
-            override fun OnItemClick(data: User) {
+        adapter.setOnItemClickCallback(object : OnItemClickCallback{
+            override fun onItemClick(data: User) {
                 val detailIntent = Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME,data.login)
-                    startActivity(it)
                 }
+                startActivity(detailIntent)
             }
 
         })
@@ -45,14 +45,18 @@ class MainActivity : AppCompatActivity() {
 
         searchListener()
 
+        viewModel.isLoading.observe(this, {
+            showLoading(it)
+        })
+
         viewModel.getSearchUsers().observe(this,{
             if (it!=null){
                 adapter.setList(it)
-                viewModel.isLoading.observe(this, {
-                    showLoading(it)
-                })
+
             }
         })
+
+
 
     }
 
@@ -68,7 +72,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.apply {
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            searchAnimation.visibility = View.GONE
+            textLoadingAnimation.visibility = View.GONE
+        }
+
     }
 
     private fun searchListener(){

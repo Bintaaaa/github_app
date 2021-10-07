@@ -10,8 +10,8 @@ data class DetailUserResponse(
 	@field:SerializedName("avatar_url")
 	val avatarUrl: String,
 
-	@field:SerializedName("following_url")
-	val followingUrl: String,
+	@field:SerializedName("html_url")
+	val url: String,
 
 	@field:SerializedName("following")
 	val following: Int,

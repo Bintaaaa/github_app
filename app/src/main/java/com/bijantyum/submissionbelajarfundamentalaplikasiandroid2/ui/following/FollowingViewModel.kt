@@ -1,4 +1,4 @@
-package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail
+package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.following
 
 import android.util.Log
 import androidx.lifecycle.LiveData

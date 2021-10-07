@@ -1,13 +1,16 @@
 package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.R
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.SectionPagerAdapter
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivityDetailUserBinding
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.loadImage
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -33,30 +36,58 @@ class DetailUserActivity : AppCompatActivity() {
             if(it != null){
                 binding.apply {
                     tvDetailUsername.text = it.login
-                    tvDetailName.text = it.name
-                    tvDetailCompany.text = it.company
+                    tvDetailName.text = it.name ?: "-"
+                    tvDetailCompany.text = it.company ?: "No Company"
                     tvDetailRepo.text = "${it.following}"
-                    tvDetailLocation.text = it.location
+                    tvDetailLocation.text = it.location ?: "No Location"
                     tvDetailFollowers.text = "${it.followers}"
                     tvDetailFollowing.text = "${it.publicRepos}"
-                    Glide.with(this@DetailUserActivity)
-                        .load(it.avatarUrl)
-                        .centerCrop()
-                        .into(ivUserPhoto)
+                    ivUserPhoto.loadImage(it.avatarUrl)
                 }
             }
+
+            btnShare(it.url)
+        })
+        viewModel.isLoading.observe(this,{
+            showLoading(it)
         })
 
+       viewPager(bundle)
+
+        btnBack()
+    }
+
+    private fun viewPager(bundle: Bundle){
         val sectionPagerAdapter = SectionPagerAdapter(this,bundle)
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         TabLayoutMediator(tabs, viewPager){ tab,position ->
-        tab.text = resources.getString(TAB_TITLES[position])
+            tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
     }
 
+    private fun btnBack(){
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
 
+    private fun btnShare(url: String){
+        binding.btnShared.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT, url)
+            intent.type = "text/plain"
+            startActivity(intent)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.apply {
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+    }
 
     companion object{
         const val EXTRA_USERNAME = "extra_username"

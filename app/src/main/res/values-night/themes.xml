@@ -16,6 +16,6 @@
         <item name="windowActionBar">false</item>
     </style>
     <style name="frameSearch">
-        <item name="android:background">@color/black</item>
+        <item name="android:background">@color/softBlack</item>
     </style>
 </resources>

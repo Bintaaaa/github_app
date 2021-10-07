@@ -14,8 +14,13 @@ class DetailUserViewModel: ViewModel() {
     private val _user = MutableLiveData<DetailUserResponse>()
     fun getUserDetail(): LiveData<DetailUserResponse> = _user
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun setUserDetail(username: String?){
+        _isLoading.value = true
         if (username != null) {
+            _isLoading.value = false
             ApiConfig.getApiService()
                 .getDetailUser(username)
                 .enqueue(object : Callback<DetailUserResponse>{
@@ -29,6 +34,7 @@ class DetailUserViewModel: ViewModel() {
                     }
 
                     override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
+                        _isLoading.value = false
                         Log.d(TAG, "${t.message}")
                     }
 

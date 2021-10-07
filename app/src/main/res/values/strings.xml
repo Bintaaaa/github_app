@@ -1,17 +1,17 @@
 <resources>
-    <string name="app_name">SubmissionBelajar Fundamental Aplikasi Android 2</string>
+    <string name="app_name">Github Users</string>
     <string name="foto_of_user_list">foto of user list</string>
     <string name="username">Username</string>
     <string name="url">https://api.github.com/users/Bintaaaa</string>
     <string name="hiasan_detail">hiasan detail</string>
     <string name="search">Search</string>
-    <string name="button_search">Button Search</string>
     <string name="usesrname">Username</string>
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="google_inc">Google Inc.</string>
     <string name="jakarta_indonesia">Jakarta, Indonesia</string>
-    <string name="total">17890</string>
     <string name="repository">Repository</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="cari_yuk_developer_terbaik_menurutmu">Cari yuk developer terbaik menurutmu...</string>
+    <string name="not_have_data">Not Have Data..</string>
 </resources>

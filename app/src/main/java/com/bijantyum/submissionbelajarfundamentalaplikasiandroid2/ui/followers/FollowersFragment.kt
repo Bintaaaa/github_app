@@ -1,4 +1,4 @@
-package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail
+package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.followers
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.R
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.UserAdapter
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.FragmentDetailFollowersBinding
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail.DetailUserActivity
 
 class FollowersFragment: Fragment(R.layout.fragment_detail_followers) {
     private var _binding : FragmentDetailFollowersBinding? = null
@@ -32,17 +33,18 @@ class FollowersFragment: Fragment(R.layout.fragment_detail_followers) {
             rvUserFollowers.adapter = userAdapter
         }
 
-            viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowersViewModel::class.java)
+            viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+                FollowersViewModel::class.java)
             viewModel.setListFollowers(username)
             viewModel.getListFollowers().observe(viewLifecycleOwner,{
                 if (it!=null){
                     userAdapter.setList(it)
-                    viewModel.isLoading.observe(viewLifecycleOwner,{
-                        showLoading(it)
-                    })
+                    binding.tvNotFound.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
                 }
             })
-
+        viewModel.isLoading.observe(viewLifecycleOwner,{
+            showLoading(it)
+        })
 
     }
 
@@ -52,7 +54,10 @@ class FollowersFragment: Fragment(R.layout.fragment_detail_followers) {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+        binding.apply {
+            progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            tvNotFound.visibility = View.GONE
+        }
 
+    }
 }
