@@ -10,6 +10,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
     @GET("search/users")
     @Headers("Authorization: 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")
     fun getSearchUsers(

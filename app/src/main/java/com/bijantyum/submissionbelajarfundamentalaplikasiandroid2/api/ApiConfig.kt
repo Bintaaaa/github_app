@@ -12,8 +12,7 @@ class ApiConfig {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            val apiInstance = retrofit.create(ApiService::class.java)
-            return apiInstance
+            return retrofit.create(ApiService::class.java)
         }
     }
 }

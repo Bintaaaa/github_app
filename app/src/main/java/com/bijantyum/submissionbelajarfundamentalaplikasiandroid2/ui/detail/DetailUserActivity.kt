@@ -11,7 +11,6 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.R
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.SectionPagerAdapter
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivityDetailUserBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.loadImage
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -59,7 +58,7 @@ class DetailUserActivity : AppCompatActivity() {
 
     private fun viewPager(bundle: Bundle){
         val sectionPagerAdapter = SectionPagerAdapter(this,bundle)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         TabLayoutMediator(tabs, viewPager){ tab,position ->

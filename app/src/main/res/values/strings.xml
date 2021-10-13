@@ -14,4 +14,7 @@
     <string name="following">Following</string>
     <string name="cari_yuk_developer_terbaik_menurutmu">Cari yuk developer terbaik menurutmu...</string>
     <string name="not_have_data">Not Have Data..</string>
+    <string name="button_back">Button Back</string>
+    <string name="button_share">Button Share</string>
+    <string name="menu">menu</string>
 </resources>

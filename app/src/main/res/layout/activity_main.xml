@@ -15,6 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_vertical"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/menu"
+            android:src="@drawable/ic_baseline_menu_24"
+            app:layout_constraintBottom_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchView" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/searchBox"
@@ -26,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/search"
+                android:layout_marginLeft="30dp"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="@color/white"
@@ -36,9 +49,11 @@
         <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
+            android:contentDescription="@string/search"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:layout_marginTop="3dp"
+
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_search_24" />
     </FrameLayout>
@@ -88,7 +103,7 @@
         android:fontFamily="@font/oswald_light"
         android:text="@string/cari_yuk_developer_terbaik_menurutmu"
         android:textColor="@color/green"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.455"
