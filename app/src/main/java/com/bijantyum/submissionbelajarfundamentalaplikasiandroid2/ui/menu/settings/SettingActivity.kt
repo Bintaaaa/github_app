@@ -1,31 +1,30 @@
-package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.splashScreen
+package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivitySplashScreeenBinding
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivitySettingsBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.helper.ViewModelFactory
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main.MainActivity
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingPreferences
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingViewModel
+class SettingActivity : AppCompatActivity() {
 
-class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySettingsBinding
 
-    private lateinit var binding: ActivitySplashScreeenBinding
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreeenBinding.inflate(layoutInflater)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+        val switchTheme = binding.switchTheme
 
         val pref = SettingPreferences.getInstance(dataStore)
         val viewModel =
@@ -34,19 +33,16 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.getThemeSettings().observe(this, { isDarkModeActive ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                switchTheme.isChecked = true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                switchTheme.isChecked = false
             }
         })
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, DELAY)
 
-    }
-
-    companion object{
-        private const val DELAY = 3000L
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            switchTheme.isChecked = isChecked
+            viewModel.saveThemeSettings(isChecked)
+        }
     }
 }

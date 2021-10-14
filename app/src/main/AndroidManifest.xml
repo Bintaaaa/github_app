@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubmissionBelajarFundamentalAplikasiAndroid2">
         <activity
-            android:name=".ui.menu.settings.SettingsActivity"
+            android:name=".ui.menu.settings.SettingActivity"
             android:exported="true" />
         <activity
             android:name=".ui.menu.favorite.FavoriteActivity"
             android:exported="true" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".ui.detail.DetailUserActivity"
             android:exported="true" />
@@ -32,10 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

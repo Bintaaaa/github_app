@@ -14,7 +14,7 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.adapter.UserAd
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.User
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail.DetailUserActivity
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.favorite.FavoriteActivity
-import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingsActivity
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingActivity
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.OnItemClickCallback
 
 class MainActivity : AppCompatActivity() {
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.settings ->{
-                        val intent =  Intent(this@MainActivity,SettingsActivity::class.java)
+                        val intent =  Intent(this@MainActivity, SettingActivity::class.java)
                         startActivity(intent)
                     }
                 }
