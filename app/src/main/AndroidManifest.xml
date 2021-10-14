@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bijantyum.submissionbelajarfundamentalaplikasiandroid2" >
+    package="com.bijantyum.submissionbelajarfundamentalaplikasiandroid2">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SubmissionBelajarFundamentalAplikasiAndroid2" >
+        android:theme="@style/Theme.SubmissionBelajarFundamentalAplikasiAndroid2">
+        <activity
+            android:name=".ui.menu.settings.SettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.menu.favorite.FavoriteActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />

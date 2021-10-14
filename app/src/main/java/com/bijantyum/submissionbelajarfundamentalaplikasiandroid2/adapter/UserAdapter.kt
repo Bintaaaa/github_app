@@ -7,8 +7,6 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.Use
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ItemUserBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.OnItemClickCallback
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.loadImage
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserHolder>() {
     private val listUser = ArrayList<User>()

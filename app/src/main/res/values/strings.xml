@@ -17,4 +17,7 @@
     <string name="button_back">Button Back</string>
     <string name="button_share">Button Share</string>
     <string name="menu">menu</string>
+    <string name="option_menu">option menu</string>
+    <string name="favorite">Favorite</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.viewbinding.ViewBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivitySplashScreeenBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.main.MainActivity
 
