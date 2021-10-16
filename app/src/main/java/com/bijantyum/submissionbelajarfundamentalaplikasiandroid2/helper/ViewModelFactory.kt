@@ -3,6 +3,7 @@ package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.favorite.FavoriteViewModel
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingPreferences
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.menu.settings.SettingViewModel
 import java.lang.IllegalArgumentException
@@ -21,6 +22,9 @@ class ViewModelFactory private constructor(private val mApplication: Application
         return when {
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
                 preferences?.let { SettingViewModel(it) } as T
+            }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) ->{
+                FavoriteViewModel(mApplication)  as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

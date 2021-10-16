@@ -11,6 +11,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.ActivitySettingsBinding
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.helper.ViewModelFactory
+
 class SettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding

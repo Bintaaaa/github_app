@@ -1,21 +1,26 @@
 package com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.ui.detail
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.api.ApiConfig
+import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.database.FavoriteUserRepository
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.data.model.DetailUserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailUserViewModel: ViewModel() {
+class DetailUserViewModel(application: Application): AndroidViewModel(application) {
     private val _user = MutableLiveData<DetailUserResponse>()
     fun getUserDetail(): LiveData<DetailUserResponse> = _user
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
 
     fun setUserDetail(username: String?){
         _isLoading.value = true
@@ -42,6 +47,10 @@ class DetailUserViewModel: ViewModel() {
         }
     }
 
+    fun addToFavorite(id: Int?, username: String?, avatar: String?, url: String?) = mFavoriteUserRepository.addToFavorite(id,username,avatar,url)
+    fun removeFromFavorite(id: Int) = mFavoriteUserRepository.removeFavorite(id)
+
+    suspend fun checkUser(id: Int) = mFavoriteUserRepository.checkUser(id)
     companion object{
         const val TAG = "DetailUserViewModel"
     }

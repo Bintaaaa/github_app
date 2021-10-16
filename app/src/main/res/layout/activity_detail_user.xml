@@ -62,6 +62,20 @@
                     app:layout_constraintStart_toEndOf="@+id/btnBack"
                     app:layout_constraintTop_toTopOf="@+id/btnShared"
                     tools:text="@string/usesrname" />
+
+                <ToggleButton
+                    android:id="@+id/toggleFavorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/favorite_toggle"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnShared"
+                    app:layout_constraintEnd_toStartOf="@+id/btnShared"
+                    app:layout_constraintTop_toTopOf="@+id/btnShared" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </Toolbar>
 

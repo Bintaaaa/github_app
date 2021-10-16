@@ -13,12 +13,15 @@ import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.databinding.Ac
 import com.bijantyum.submissionbelajarfundamentalaplikasiandroid2.util.loadImage
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
     private lateinit var viewModel: DetailUserViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
@@ -26,10 +29,14 @@ class DetailUserActivity : AppCompatActivity() {
 
 
         val usernameDetail = intent.getStringExtra(EXTRA_USERNAME)
+        val id = intent.getIntExtra(EXTRA_ID,0)
+        val avatar = intent.getStringExtra(EXTRA_AVATAR)
+        val url = intent.getStringExtra(EXTRA_URL)
         val bundle = Bundle()
+        var _isChecked = false
         bundle.putString(EXTRA_USERNAME,usernameDetail)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(DetailUserViewModel::class.java)
         viewModel.setUserDetail(username = usernameDetail)
         viewModel.getUserDetail().observe(this,{
             if(it != null){
@@ -54,7 +61,33 @@ class DetailUserActivity : AppCompatActivity() {
        viewPager(bundle)
 
         btnBack()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = viewModel.checkUser(id)
+            withContext(Dispatchers.Main){
+                if (count != null){
+                    if (count > 0){
+                        binding.toggleFavorite.isChecked = true
+                        _isChecked = true
+                    }else{
+                        binding.toggleFavorite.isChecked = false
+                        _isChecked = false
+                    }
+                }
+            }
+        }
+
+        binding.toggleFavorite.setOnClickListener {
+            _isChecked = !_isChecked
+            if (_isChecked){
+                viewModel.addToFavorite(id = id, username = usernameDetail, avatar =  avatar, url = url)
+            }else{
+                viewModel.removeFromFavorite(id = id)
+            }
+            binding.toggleFavorite.isChecked = _isChecked
+        }
     }
+
 
     private fun viewPager(bundle: Bundle){
         val sectionPagerAdapter = SectionPagerAdapter(this,bundle)
@@ -90,6 +123,10 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_USERNAME = "extra_username"
+        const val EXTRA_ID = "extra_id"
+        const val EXTRA_AVATAR = "extra_avatar"
+        const val EXTRA_URL = "extra_url"
+
             @StringRes
             private val TAB_TITLES = intArrayOf(
                 R.string.followers,
