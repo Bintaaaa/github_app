@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     @field:SerializedName("login")
-    val login: String,
+    val login: String?,
 
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @field:SerializedName("url")
-    val url: String,
+    val url: String?,
 
     @field:SerializedName("avatar_url")
-    val avatarUrl: String,
+    val avatarUrl: String?,
 
-)
+    )
